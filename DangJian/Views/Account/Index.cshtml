@@ -1,0 +1,51 @@
+﻿@model DangJian.Models.User
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "登录";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<section id="loginForm">
+    <h2></h2>
+    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>“登录”表单</legend>
+            <ol>
+                <li>
+                    <label for="UserId">用户名</label>
+                    <input data-val="true" data-val-required="请输入用户名。" id="UserId" name="UserId" type="text" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="UserId" data-valmsg-replace="true"></span>
+                </li>
+                <li>
+                    <label for="Password">密码</label>
+                    <input data-val="true" data-val-required="请输入密码。" id="Password" name="Password" type="password" />
+                    <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                </li>
+            </ol>
+            <input type="submit" value="登　录" />
+        </fieldset>
+    }
+</section>
+
+<section class="social" id="socialLoginForm">
+    <h2>放张相关主题图片</h2>
+
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function () {
+            $("#UserId").focus();
+        });
+    </script>
+}
