@@ -1,0 +1,11 @@
+﻿@model System.Collections.Generic.IEnumerable<DangJian.ViewModels.QuotaRecordVM>
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>@Html.DisplayFor(modelItem => item.FillInfo)</td>
+        </tr>
+    }
+</table>

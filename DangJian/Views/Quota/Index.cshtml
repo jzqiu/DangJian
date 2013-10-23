@@ -1,0 +1,14 @@
+﻿@model System.Collections.Generic.IEnumerable<DangJian.Models.QuotaGroup>
+
+@{
+    ViewBag.Title = "指标填报";
+}
+
+<h2>教育系统党风廉政建设责任制考核指标</h2>
+
+@foreach (var item in Model)
+{
+    <h3><span>一级指标：</span> @Html.DisplayFor(modelItem => item.Name)</h3>
+    <br />
+    @Html.Action("QuotaList", "Quota", new { groupCode = item.Code })
+}
