@@ -9,7 +9,7 @@ body {
     border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-family: "宋体", "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
 }
@@ -63,6 +63,7 @@ h4, h5, h6 {
     color: #000;
     margin-bottom: 0;
     padding-bottom: 0;
+    font-weight:normal;
 }
 
 h1 {
@@ -753,3 +754,32 @@ tr.pager td {
             margin: 0;
         }
 }
+
+/********************/
+/* 表格样式 */
+.table
+{
+    border-collapse: collapse;
+    border: 1px solid #D1E0EF;
+    margin-bottom: 5px;
+}
+
+    .table td {
+        border: 1px solid #D1E0EF;
+    text-align: left;
+    padding: 4px;
+    background-color: #FFF;
+    height: 20px;
+    }
+
+.table .nameField
+{
+    border: 1px solid #D1E0EF;
+    height: 20px;
+    text-align: left;
+    background-color: #F7FBFF;
+    color: #000;
+    padding: 4px;
+}
+
+/********************/

@@ -12,14 +12,11 @@ namespace DangJian.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Grade
     {
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string RoleType { get; set; }
-        public string DepartmentCode { get; set; }
-    
-        public virtual Department Department { get; set; }
+        public string RecordId { get; set; }
+        public Nullable<int> Value { get; set; }
+        public string Reason { get; set; }
+        public string CreateUser { get; set; }
     }
 }

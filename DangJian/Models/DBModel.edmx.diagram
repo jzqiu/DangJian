@@ -6,12 +6,15 @@
     <edmx:Diagrams>
       <Diagram DiagramId="f264d7c19dc244ddb4cd4af3325ac220" Name="关系图1">
         <EntityTypeShape EntityType="DJModel.User" Width="1.5" PointX="1.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DJModel.Attachment" Width="1.5" PointX="3.5" PointY="1" />
+        <EntityTypeShape EntityType="DJModel.Attachment" Width="1.5" PointX="2.125" PointY="6.875" />
         <EntityTypeShape EntityType="DJModel.Quota" Width="1.5" PointX="1.25" PointY="3.5" />
         <EntityTypeShape EntityType="DJModel.QuotaGroup" Width="1.5" PointX="4.25" PointY="5" />
         <EntityTypeShape EntityType="DJModel.QuotaRecord" Width="1.5" PointX="6" PointY="3.125" />
         <AssociationConnector Association="DJModel.FK_Quota_QuotaGroup" />
         <AssociationConnector Association="DJModel.FK_QuotaRecord_Quota" />
+        <EntityTypeShape EntityType="DJModel.Department" Width="1.5" PointX="3.75" PointY="1" />
+        <EntityTypeShape EntityType="DJModel.Grade" Width="1.5" PointX="7.125" PointY="6" />
+        <AssociationConnector Association="DJModel.FK_User_Department" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

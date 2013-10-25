@@ -7,6 +7,8 @@
     <Schema Namespace="DJModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="DJModelStoreContainer">
           <EntitySet Name="Attachment" EntityType="DJModel.Store.Attachment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Department" EntityType="DJModel.Store.Department" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Grade" EntityType="DJModel.Store.Grade" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Quota" EntityType="DJModel.Store.Quota" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="QuotaGroup" EntityType="DJModel.Store.QuotaGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="QuotaRecord" EntityType="DJModel.Store.QuotaRecord" store:Type="Tables" Schema="dbo" />
@@ -19,6 +21,10 @@
             <End Role="Quota" EntitySet="Quota" />
             <End Role="QuotaRecord" EntitySet="QuotaRecord" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_Department" Association="DJModel.Store.FK_User_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Attachment">
           <Key>
@@ -27,6 +33,23 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Record_Id" Type="varchar" MaxLength="36" />
           <Property Name="Path" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Seq" Type="int" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="RecordId" />
+          </Key>
+          <Property Name="RecordId" Type="varchar" Nullable="false" MaxLength="36" />
+          <Property Name="Value" Type="int" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Quota">
           <Key>
@@ -56,7 +79,7 @@
           </Key>
           <Property Name="GUID" Type="varchar" Nullable="false" MaxLength="36" />
           <Property Name="QuotaCode" Type="varchar" MaxLength="10" />
-          <Property Name="Info" Type="nvarchar" MaxLength="500" />
+          <Property Name="Info" Type="nvarchar" MaxLength="1000" />
           <Property Name="Remark" Type="nvarchar" MaxLength="100" />
           <Property Name="CreateUser" Type="varchar" MaxLength="50" />
           <Property Name="CreateYear" Type="int" />
@@ -70,6 +93,7 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
           <Property Name="RoleType" Type="varchar" MaxLength="50" />
+          <Property Name="DepartmentCode" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Quota_QuotaGroup">
           <End Role="QuotaGroup" Type="DJModel.Store.QuotaGroup" Multiplicity="0..1" />
@@ -95,6 +119,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_Department">
+          <End Role="Department" Type="DJModel.Store.Department" Multiplicity="0..1" />
+          <End Role="User" Type="DJModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="DepartmentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -113,6 +149,12 @@
             <End Role="Quota" EntitySet="Quotas" />
             <End Role="QuotaRecord" EntitySet="QuotaRecords" />
           </AssociationSet>
+          <EntitySet Name="Departments" EntityType="DJModel.Department" />
+          <EntitySet Name="Grades" EntityType="DJModel.Grade" />
+          <AssociationSet Name="FK_User_Department" Association="DJModel.FK_User_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -122,6 +164,8 @@
           <Property Name="UserName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Type="String" Name="RoleType" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DepartmentCode" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Department" Relationship="DJModel.FK_User_Department" FromRole="User" ToRole="Department" />
         </EntityType>
         <EntityType Name="Attachment">
           <Key>
@@ -162,7 +206,7 @@
           </Key>
           <Property Type="String" Name="GUID" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="QuotaCode" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Info" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Info" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Remark" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="CreateUser" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="CreateYear" />
@@ -193,6 +237,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Seq" />
+          <NavigationProperty Name="Users" Relationship="DJModel.FK_User_Department" FromRole="Department" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="RecordId" />
+          </Key>
+          <Property Type="String" Name="RecordId" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Value" />
+          <Property Type="String" Name="Reason" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CreateUser" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_User_Department">
+          <End Type="DJModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="DJModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="DepartmentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -202,6 +276,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DJModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
                 <ScalarProperty Name="RoleType" ColumnName="RoleType" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -252,6 +327,25 @@
                 <ScalarProperty Name="Info" ColumnName="Info" />
                 <ScalarProperty Name="QuotaCode" ColumnName="QuotaCode" />
                 <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="DJModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="DJModel.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

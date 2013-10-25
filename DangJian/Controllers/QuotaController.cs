@@ -21,6 +21,23 @@ namespace DangJian.Controllers
                 .ToList());
         }
 
+        public ActionResult Fill(string quotaCode)
+        {
+            User user = Session["UserInfo"] as User;
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Account");
+            }
+
+            var quota = ctx.Quotas.Find(quotaCode);
+            quota.QuotaRecord = (from r in ctx.QuotaRecords
+                                where r.CreateUser == user.UserId
+                                && r.QuotaCode == quotaCode
+                                select r).ToList();
+
+            return View(quota);
+        }
+
         [ChildActionOnly]
         public ActionResult QuotaList(string groupCode)
         {
@@ -44,6 +61,7 @@ namespace DangJian.Controllers
                        from gg in g.DefaultIfEmpty()
                        select new QuotaRecordVM
                        {
+                           QuotaCode = q.Code,
                            Description = q.Description,
                            FillInfo = gg.GUID == null ? "未填报" : "已填报"
                        };

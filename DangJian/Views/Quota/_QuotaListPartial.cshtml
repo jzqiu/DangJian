@@ -1,11 +1,11 @@
 ﻿@model System.Collections.Generic.IEnumerable<DangJian.ViewModels.QuotaRecordVM>
 
-<table>
+<table class="table">
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.Description)</td>
-            <td>@Html.DisplayFor(modelItem => item.FillInfo)</td>
+            <td style="width:700px;">@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>@Html.ActionLink(item.FillInfo, "Fill", new { QuotaCode = item.QuotaCode })</td>
         </tr>
     }
 </table>
