@@ -760,12 +760,12 @@ tr.pager td {
 .table
 {
     border-collapse: collapse;
-    border: 1px solid #D1E0EF;
+    border: 1px solid #7ac0da;
     margin-bottom: 5px;
 }
 
     .table td {
-        border: 1px solid #D1E0EF;
+        border: 1px solid #7ac0da;
     text-align: left;
     padding: 4px;
     background-color: #FFF;
@@ -774,7 +774,7 @@ tr.pager td {
 
 .table .nameField
 {
-    border: 1px solid #D1E0EF;
+    border: 1px solid #7ac0da;
     height: 20px;
     text-align: left;
     background-color: #F7FBFF;

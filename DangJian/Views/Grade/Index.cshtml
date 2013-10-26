@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DangJian.Models.Department>
+
+@{
+    ViewBag.Title = "考评中心";
+}
+
+<div style="float: left; width: 200px;">
+    @Html.Action("Index", "Department")
+</div>
+<div style="float:right; width:700px;">
+    <table class="table">
+        <tr>
+            <td style="width:200px;">部门</td>
+            <td style="width:100px;">指标考核分</td>
+            <td style="width:100px;">指标考核详情</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @ViewBag.QSum
+                </td>
+                <td>
+                    @Html.ActionLink("查看", "Details", new { Department = item })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

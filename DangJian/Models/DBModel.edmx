@@ -13,6 +13,15 @@
           <EntitySet Name="QuotaGroup" EntityType="DJModel.Store.QuotaGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="QuotaRecord" EntityType="DJModel.Store.QuotaRecord" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="DJModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="V_GradeQuota" EntityType="DJModel.Store.V_GradeQuota" store:Type="Views" store:Schema="dbo" store:Name="V_GradeQuota">
+            <DefiningQuery>SELECT 
+      [V_GradeQuota].[Deducting] AS [Deducting], 
+      [V_GradeQuota].[Reason] AS [Reason], 
+      [V_GradeQuota].[UserName] AS [UserName], 
+      [V_GradeQuota].[Description] AS [Description], 
+      [V_GradeQuota].[RecordId] AS [RecordId]
+      FROM [dbo].[V_GradeQuota] AS [V_GradeQuota]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Quota_QuotaGroup" Association="DJModel.Store.FK_Quota_QuotaGroup">
             <End Role="QuotaGroup" EntitySet="QuotaGroup" />
             <End Role="Quota" EntitySet="Quota" />
@@ -48,6 +57,7 @@
           </Key>
           <Property Name="RecordId" Type="varchar" Nullable="false" MaxLength="36" />
           <Property Name="Value" Type="int" />
+          <Property Name="Deducting" Type="int" />
           <Property Name="Reason" Type="nvarchar" MaxLength="100" />
           <Property Name="CreateUser" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -94,6 +104,19 @@
           <Property Name="Password" Type="varchar" MaxLength="50" />
           <Property Name="RoleType" Type="varchar" MaxLength="50" />
           <Property Name="DepartmentCode" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“DangJian.dbo.V_GradeQuota”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="V_GradeQuota">
+          <Key>
+            <PropertyRef Name="RecordId" />
+          </Key>
+          <Property Name="Deducting" Type="int" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="RecordId" Type="varchar" Nullable="false" MaxLength="36" />
         </EntityType>
         <Association Name="FK_Quota_QuotaGroup">
           <End Role="QuotaGroup" Type="DJModel.Store.QuotaGroup" Multiplicity="0..1" />
@@ -155,6 +178,7 @@
             <End Role="Department" EntitySet="Departments" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="V_GradeQuota" EntityType="DJModel.V_GradeQuota" />
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -254,6 +278,7 @@
           <Property Type="Int32" Name="Value" />
           <Property Type="String" Name="Reason" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="CreateUser" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Deducting" />
         </EntityType>
         <Association Name="FK_User_Department">
           <End Type="DJModel.Department" Role="Department" Multiplicity="0..1" />
@@ -267,6 +292,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_GradeQuota">
+          <Key>
+            <PropertyRef Name="RecordId" />
+          </Key>
+          <Property Type="Int32" Name="Deducting" />
+          <Property Type="String" Name="Reason" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RecordId" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -342,10 +377,22 @@
           <EntitySetMapping Name="Grades">
             <EntityTypeMapping TypeName="DJModel.Grade">
               <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="Deducting" ColumnName="Deducting" />
                 <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_GradeQuota">
+            <EntityTypeMapping TypeName="DJModel.V_GradeQuota">
+              <MappingFragment StoreEntitySet="V_GradeQuota">
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Deducting" ColumnName="Deducting" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

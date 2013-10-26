@@ -1,0 +1,25 @@
+﻿@model System.Collections.Generic.IEnumerable<DangJian.Models.V_GradeQuota>
+
+@{
+    ViewBag.Title = "扣分信息";
+}
+
+<h3 style="text-align:center">扣分信息</h3>
+
+<table class="table">
+    <tr>
+        <td style="width:300px">指标</td>
+        <td style="width:80px">扣分人</td>
+        <td style="width:60px">分值</td>
+        <td style="width:500px">扣分原因</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Description</td>
+            <td>@item.UserName</td>
+            <td>@item.Deducting</td>
+            <td>@item.Reason</td>
+        </tr>
+    }
+</table>

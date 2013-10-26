@@ -15,6 +15,7 @@
         <EntityTypeShape EntityType="DJModel.Department" Width="1.5" PointX="3.75" PointY="1" />
         <EntityTypeShape EntityType="DJModel.Grade" Width="1.5" PointX="7.125" PointY="6" />
         <AssociationConnector Association="DJModel.FK_User_Department" />
+        <EntityTypeShape EntityType="DJModel.V_GradeQuota" Width="1.5" PointX="4.375" PointY="8.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

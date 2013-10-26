@@ -12,12 +12,12 @@ namespace DangJian.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Grade
+    public partial class V_GradeQuota
     {
-        public string RecordId { get; set; }
-        public Nullable<int> Value { get; set; }
-        public string Reason { get; set; }
-        public string CreateUser { get; set; }
         public Nullable<int> Deducting { get; set; }
+        public string Reason { get; set; }
+        public string UserName { get; set; }
+        public string Description { get; set; }
+        public string RecordId { get; set; }
     }
 }

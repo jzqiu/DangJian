@@ -1,0 +1,16 @@
+﻿@model IEnumerable<DangJian.Models.Department>
+
+<input type="button" value="部门导航" style="width: 100%" />
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="width: 200px;">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+        </tr>
+    }
+
+</table>
+

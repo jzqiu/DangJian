@@ -32,5 +32,6 @@ namespace DangJian.Models
         public DbSet<QuotaRecord> QuotaRecords { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Grade> Grades { get; set; }
+        public DbSet<V_GradeQuota> V_GradeQuota { get; set; }
     }
 }

@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "填报信息";
 }
-
-<h3>指标详情&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">标准分： @Model.Value.ToString() 分</span></h3>
+<h2>当前查看部门：</h2>
+<h3>指标详情&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">标准分： @Model.Value.ToString() 分</span></h3><input type="button" value="打　分" />
 <br />
 @Model.Description
 <br />
@@ -13,7 +13,6 @@
 @Model.Standard
 <br />
 <h3>填报信息</h3>
-<input type="button" value="新增记录" />
 <table class="table">
     <tr>
         <td style="width: 40px">序号</td>
