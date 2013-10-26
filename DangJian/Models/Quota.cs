@@ -16,7 +16,7 @@ namespace DangJian.Models
     {
         public Quota()
         {
-            this.QuotaRecord = new HashSet<QuotaRecord>();
+            this.QuotaRecords = new HashSet<QuotaRecord>();
         }
     
         public string Code { get; set; }
@@ -29,6 +29,6 @@ namespace DangJian.Models
         public string ShowType { get; set; }
     
         public virtual QuotaGroup QuotaGroup { get; set; }
-        public virtual ICollection<QuotaRecord> QuotaRecord { get; set; }
+        public virtual ICollection<QuotaRecord> QuotaRecords { get; set; }
     }
 }

@@ -14,10 +14,11 @@ namespace DangJian.Models
     
     public partial class Grade
     {
-        public string RecordId { get; set; }
+        public string QuotaCode { get; set; }
+        public string DepartmentCode { get; set; }
         public Nullable<int> Value { get; set; }
+        public Nullable<int> Deducting { get; set; }
         public string Reason { get; set; }
         public string CreateUser { get; set; }
-        public Nullable<int> Deducting { get; set; }
     }
 }

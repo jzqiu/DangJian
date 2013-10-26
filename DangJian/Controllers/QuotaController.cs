@@ -30,7 +30,7 @@ namespace DangJian.Controllers
             }
 
             var quota = ctx.Quotas.Find(quotaCode);
-            quota.QuotaRecord = (from r in ctx.QuotaRecords
+            quota.QuotaRecords = (from r in ctx.QuotaRecords
                                 where r.CreateUser == user.UserId
                                 && r.QuotaCode == quotaCode
                                 select r).ToList();
@@ -48,7 +48,7 @@ namespace DangJian.Controllers
             }
 
             var records = from r in ctx.QuotaRecords
-                          where r.CreateUser == user.UserId
+                          where r.DepartmentCode == user.DepartmentCode
                           select new
                           {
                               r.GUID,

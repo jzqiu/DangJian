@@ -10,5 +10,6 @@ namespace DangJian.ViewModels
         public string QuotaCode { get; set; }
         public string Description { get; set; }
         public string FillInfo { get; set; }
+        public int? Value { get; set; }
     }
 }

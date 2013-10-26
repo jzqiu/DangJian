@@ -24,7 +24,7 @@
                     @ViewBag.QSum
                 </td>
                 <td>
-                    @Html.ActionLink("查看", "Details", new { Department = item })
+                    @Html.ActionLink("查看", "Details", new { DepCode = item.Code, DepName = item.Name })
                 </td>
             </tr>
         }

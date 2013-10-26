@@ -18,6 +18,7 @@ namespace DangJian.Models
         public string Reason { get; set; }
         public string UserName { get; set; }
         public string Description { get; set; }
-        public string RecordId { get; set; }
+        public string QuotaCode { get; set; }
+        public string DepartmentCode { get; set; }
     }
 }

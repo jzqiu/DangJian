@@ -21,6 +21,7 @@ namespace DangJian.Models
         public string CreateUser { get; set; }
         public Nullable<int> CreateYear { get; set; }
         public string CreateDate { get; set; }
+        public string DepartmentCode { get; set; }
     
         public virtual Quota Quota { get; set; }
     }

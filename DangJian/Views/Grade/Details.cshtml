@@ -1,0 +1,29 @@
+﻿@model IEnumerable<DangJian.Models.QuotaGroup>
+
+@{
+    ViewBag.Title = "指标考核详情";
+}
+
+<div style="float: left; width: 200px;">
+    @Html.Action("Index", "Department")
+</div>
+<div style="float: right; width: 700px;">
+    <h3 style="text-align: center">当前查看部门： @ViewBag.CurrenDep</h3>
+    <br />
+    综合得分： @ViewBag.GSum &nbsp;&nbsp;&nbsp;&nbsp;扣分： @ViewBag.DSum &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.ActionLink("扣分信息", "")
+
+    <table class="table">
+        <tr>
+            <td style="width: 550px;">指标</td>
+            <td style="width: 90px;">填报状态</td>
+            <td style="width: 60px;">得分</td>
+        </tr>
+        @foreach (var item in Model)
+        { 
+            <tr>
+                <td colspan="3">一级指标：  @Html.DisplayFor(modelItem => item.Name)</td>
+            </tr>
+            @Html.Action("GradeList", "Grade", new { groupCode = item.Code })
+        }
+    </table>
+</div>

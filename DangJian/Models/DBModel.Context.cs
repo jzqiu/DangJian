@@ -26,12 +26,11 @@ namespace DangJian.Models
         }
     
         public DbSet<User> Users { get; set; }
-        public DbSet<Attachment> Attachments { get; set; }
-        public DbSet<Quota> Quotas { get; set; }
-        public DbSet<QuotaGroup> QuotaGroups { get; set; }
-        public DbSet<QuotaRecord> QuotaRecords { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<V_GradeQuota> V_GradeQuota { get; set; }
+        public DbSet<Quota> Quotas { get; set; }
+        public DbSet<QuotaGroup> QuotaGroups { get; set; }
+        public DbSet<QuotaRecord> QuotaRecords { get; set; }
     }
 }
