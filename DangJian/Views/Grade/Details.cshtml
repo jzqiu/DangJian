@@ -10,7 +10,7 @@
 <div style="float: right; width: 700px;">
     <h3 style="text-align: center">当前查看部门： @ViewBag.CurrenDep</h3>
     <br />
-    综合得分： @ViewBag.GSum &nbsp;&nbsp;&nbsp;&nbsp;扣分： @ViewBag.DSum &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.ActionLink("扣分信息", "")
+    综合得分： @ViewBag.GSum &nbsp;&nbsp;&nbsp;&nbsp;扣分： @ViewBag.DSum &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onclick="javascript:ViewDeducting()">扣分信息</a>
 
     <table class="table">
         <tr>
@@ -23,7 +23,15 @@
             <tr>
                 <td colspan="3">一级指标：  @Html.DisplayFor(modelItem => item.Name)</td>
             </tr>
-            @Html.Action("GradeList", "Grade", new { groupCode = item.Code })
+            @Html.Action("GradeList", "Grade", new { groupCode = item.Code, depCode = ViewBag.DepCode })
         }
     </table>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function ViewDeducting() {
+            window.open('@Url.Action("DeductingList", new{ depCode = ViewBag.DepCode })', '', 'width=800,height=400,location=no,menubar=no,status=no,scrollbars=auto');
+        }
+    </script>
+}

@@ -292,12 +292,12 @@
     <Content Include="Views\Quota\Index.cshtml" />
     <Content Include="Views\Quota\_QuotaListPartial.cshtml" />
     <Content Include="Views\Quota\Fill.cshtml" />
-    <Content Include="Views\Grade\DeductingList.cshtml" />
     <Content Include="Views\Grade\Create.cshtml" />
     <Content Include="Views\Grade\Index.cshtml" />
     <Content Include="Views\Department\_DepartListPartial.cshtml" />
     <Content Include="Views\Grade\Details.cshtml" />
     <Content Include="Views\Grade\_GradeListPartial.cshtml" />
+    <Content Include="Views\Grade\DeductingList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

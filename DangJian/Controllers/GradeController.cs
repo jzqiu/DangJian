@@ -26,18 +26,13 @@ namespace DangJian.Controllers
 
         public ActionResult Details(string depCode, string depName)
         {
-            User user = Session["UserInfo"] as User;
-            if (user == null)
-            {
-                return RedirectToAction("Index", "Account");
-            }
-
             ViewBag.CurrenDep = depName;
+            ViewBag.DepCode = depCode;
             ViewBag.GSum = (from g in ctx.Grades
-                            where g.DepartmentCode == user.DepartmentCode
+                            where g.DepartmentCode == depCode
                             select g.Value).Sum();
             ViewBag.DSum = (from g in ctx.Grades
-                            where g.DepartmentCode == user.DepartmentCode
+                            where g.DepartmentCode == depCode
                             select g.Deducting).Sum();
 
             return View(ctx.QuotaGroups
@@ -46,16 +41,10 @@ namespace DangJian.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult GradeList(string groupCode)
+        public ActionResult GradeList(string groupCode, string depCode)
         {
-            User user = Session["UserInfo"] as User;
-            if (user == null)
-            {
-                return RedirectToAction("Index", "Account");
-            }
-
             var records = from r in ctx.QuotaRecords
-                          where r.DepartmentCode == user.DepartmentCode
+                          where r.DepartmentCode == depCode
                           select new
                           {
                               r.GUID,
@@ -63,7 +52,7 @@ namespace DangJian.Controllers
                               r.DepartmentCode
                           };
             var grades = from g in ctx.Grades
-                         where g.DepartmentCode == user.DepartmentCode
+                         where g.DepartmentCode == depCode
                          select new
                          {
                              g.QuotaCode,
@@ -92,11 +81,13 @@ namespace DangJian.Controllers
             return View();
         }
 
-        public ActionResult DeductingList()
+        public ActionResult DeductingList(string depCode)
         {
-            
+            var list = from v in ctx.V_GradeQuota
+                       where v.DepartmentCode == depCode
+                       select v;
 
-            return View(ctx.V_GradeQuota.ToList());
+            return View(list.ToList());
         }
 
     }
