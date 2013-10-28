@@ -1,0 +1,57 @@
+﻿@model DangJian.Models.Quota
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html style="background-color: white">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>填报信息</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript">
+        function Grade() {
+            window.location = "@Url.Action("Create", "Grade", new { quotaCode=Model.Code, depCode=ViewBag.DepCode })";
+        }
+    </script>
+</head>
+<body style="padding: 0 2px 2px 2px;">
+    <h2>当前查看部门：@ViewBag.CurrenDep</h2>
+    <h3>指标详情&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">标准分： @Model.Value.ToString() 分</span></h3>
+    <input type="button" value="打　分" onclick="javascript: Grade()" />
+    <br />
+    @Model.Description
+    <br />
+    <h3>考核标准</h3>
+    <br />
+    @Model.Standard
+    <br />
+    <h3>填报信息</h3>
+    <table class="table">
+        <tr>
+            <td style="width: 40px">序号</td>
+            <td style="width: 60px">年份</td>
+            <td style="width: 80px">填报日期</td>
+            <td style="width: 200px">备注</td>
+            <td style="width: 80px">填报明细</td>
+        </tr>
+        @{
+            int no = 0;
+        }
+        @foreach (var item in @Model.QuotaRecords)
+        {
+            no++;
+            <tr>
+                <td>@no</td>
+                <td>@item.CreateYear</td>
+                <td>@item.CreateDate</td>
+                <td>@item.Remark</td>
+                <td>@Html.ActionLink("查看", "")</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

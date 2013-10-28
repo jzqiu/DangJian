@@ -11,11 +11,14 @@ namespace DangJian.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Grade
     {
         public string QuotaCode { get; set; }
         public string DepartmentCode { get; set; }
+        [Required]
+        [Display(Name = "分值")]
         public Nullable<int> Value { get; set; }
         public Nullable<int> Deducting { get; set; }
         public string Reason { get; set; }

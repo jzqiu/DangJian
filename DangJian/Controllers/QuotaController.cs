@@ -31,9 +31,22 @@ namespace DangJian.Controllers
 
             var quota = ctx.Quotas.Find(quotaCode);
             quota.QuotaRecords = (from r in ctx.QuotaRecords
-                                where r.CreateUser == user.UserId
+                                where r.DepartmentCode == user.DepartmentCode
                                 && r.QuotaCode == quotaCode
                                 select r).ToList();
+
+            return View(quota);
+        }
+
+        public ActionResult ViewFill(string quotaCode, string depCode, string depName)
+        {
+            ViewBag.CurrenDep = depName;
+            ViewBag.DepCode = depCode;
+            var quota = ctx.Quotas.Find(quotaCode);
+            quota.QuotaRecords = (from r in ctx.QuotaRecords
+                                  where r.DepartmentCode == depCode
+                                  && r.QuotaCode == quotaCode
+                                  select r).ToList();
 
             return View(quota);
         }

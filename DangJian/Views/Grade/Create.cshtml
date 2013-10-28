@@ -1,38 +1,60 @@
 ﻿@model DangJian.Models.Grade
 
 @{
-    ViewBag.Title = "打分";
+    Layout = null;
 }
+<!DOCTYPE html>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+<html style="background-color: white">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>打分</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 
-    <fieldset>
-        <legend>Grade</legend>
+</head>
+<body style="padding: 5px;">
+    @if (ViewBag.SaveOk == true)
+    {
+        <script type="text/javascript">
+            window.opener.location.href = window.opener.location.href;
+            window.close();
+        </script>
+    }
 
-        <div class="editor-label">
-            分值
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Value)
-            @Html.ValidationMessageFor(model => model.Value)
-        </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-        <div class="editor-label">
-            扣分原因
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Reason)
-            @Html.ValidationMessageFor(model => model.Reason)
-        </div>
+        <fieldset>
+            <legend>Grade</legend>
 
-        <p>
-            <input type="submit" value="提　交" />
-        </p>
-    </fieldset>
-}
+            <div class="editor-label">
+                分值
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Value, new { style = "width:100px" })
+                @Html.ValidationMessageFor(model => model.Value)
+                <input id="DepartmentCode" name="DepartmentCode" type="hidden" value="@ViewBag.DepartmentCode" />
 
-@section Scripts {
+            </div>
+
+            <div class="editor-label">
+                扣分原因
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Reason)
+                @Html.ValidationMessageFor(model => model.Reason)
+            </div>
+
+            <p>
+                <input type="submit" value="提　交" />
+            </p>
+        </fieldset>
+    }
+
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-}
+</body>
+</html>

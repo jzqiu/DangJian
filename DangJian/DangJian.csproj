@@ -298,6 +298,7 @@
     <Content Include="Views\Grade\Details.cshtml" />
     <Content Include="Views\Grade\_GradeListPartial.cshtml" />
     <Content Include="Views\Grade\DeductingList.cshtml" />
+    <Content Include="Views\Quota\ViewFill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

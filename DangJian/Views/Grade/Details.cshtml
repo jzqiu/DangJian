@@ -31,7 +31,12 @@
 @section Scripts {
     <script type="text/javascript">
         function ViewDeducting() {
-            window.open('@Url.Action("DeductingList", new{ depCode = ViewBag.DepCode })', '', 'width=800,height=400,location=no,menubar=no,status=no,scrollbars=auto');
+            window.open('@Url.Action("DeductingList", new{ depCode = ViewBag.DepCode, depName = ViewBag.CurrenDep })', '', 'width=800,height=400,location=no,menubar=no,status=no,scrollbars=auto');
+        }
+
+        function ViewFill(qCode) {
+            var url = "../Quota/ViewFill?quotaCode=" + qCode + "&depCode=@ViewBag.DepCode&depName=@ViewBag.CurrenDep";
+            window.open(url, '', 'width=800,height=400,location=no,menubar=no,status=no,scrollbars=auto');
         }
     </script>
 }

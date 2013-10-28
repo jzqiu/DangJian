@@ -28,12 +28,17 @@ namespace DangJian.Controllers
         {
             ViewBag.CurrenDep = depName;
             ViewBag.DepCode = depCode;
-            ViewBag.GSum = (from g in ctx.Grades
-                            where g.DepartmentCode == depCode
-                            select g.Value).Sum();
-            ViewBag.DSum = (from g in ctx.Grades
-                            where g.DepartmentCode == depCode
-                            select g.Deducting).Sum();
+            var sum = (from g in ctx.Grades
+                       where g.DepartmentCode == depCode
+                       select new
+                       {
+                           g.Value,
+                           g.Deducting
+                       }).ToList();
+            ViewBag.GSum = (from s in sum
+                            select s.Value).Sum();
+            ViewBag.DSum = (from s in sum
+                            select s.Deducting).Sum();
 
             return View(ctx.QuotaGroups
                 .OrderBy(g => g.Seq)
@@ -76,13 +81,23 @@ namespace DangJian.Controllers
             return PartialView("_GradeListPartial", list.ToList());
         }
 
-        public ActionResult Create()
+        public ActionResult Create(string quotaCode, string depCode)
         {
+            ViewBag.QuotaCode = quotaCode;
+            ViewBag.DepartmentCode = depCode;
             return View();
         }
 
-        public ActionResult DeductingList(string depCode)
+        [HttpPost]
+        public ActionResult Create(Grade grade)
         {
+            ViewBag.SaveOk = true;
+            return View();
+        }
+
+        public ActionResult DeductingList(string depCode, string depName)
+        {
+            ViewBag.CurrenDep = depName;
             var list = from v in ctx.V_GradeQuota
                        where v.DepartmentCode == depCode
                        select v;

@@ -4,7 +4,20 @@
 {
     <tr>
         <td>@Html.DisplayFor(modelItem => item.Description)</td>
-        <td>@Html.ActionLink(item.FillInfo, "Fill", new { QuotaCode = item.QuotaCode })</td>
+        <td>
+            @{
+    if (item.FillInfo == "已填报")
+    {
+        <a href="#" onclick="javascript:ViewFill('@item.QuotaCode')">已填报</a>
+    }
+    else
+    {
+        <span>未填报</span>
+    }
+            }
+            @*Html.ActionLink(item.FillInfo, "Fill", new { QuotaCode = item.QuotaCode })*@
+
+        </td>
         <td>@Html.DisplayFor(modelItem => item.Value)</td>
     </tr>
 }
