@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DangJian.ViewModels.DepartQuotaVM>
+
+@{
+    ViewBag.Title = "预警中心";
+}
+<h3 style="text-align: center;">预警情况表</h3>
+<table class="table">
+    <tr>
+        <td style="width: 40px;">序号</td>
+        <td style="width: 300px;">部门名称</td>
+        <td style="width: 100px;">应填指标数</td>
+        <td style="width: 100px;">已填指标数</td>
+        <td style="width: 100px;">未填指标数</td>
+        <td style="width: 80px;">预警信号</td>
+    </tr>
+    @{
+        int no = 0;
+    }
+    @foreach (var item in Model)
+    {
+        no++;
+        <tr>
+            <td>@no</td>
+            <td>@Html.ActionLink(item.Name, "Details", "Grade", new { DepCode = item.Code, DepName = item.Name }, null)</td>
+            <td>@item.All</td>
+            <td>@item.Had</td>
+            <td>@(item.All - item.Had)</td>
+            <td></td>
+        </tr>
+    }
+</table>

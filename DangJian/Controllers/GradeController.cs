@@ -48,14 +48,13 @@ namespace DangJian.Controllers
         [ChildActionOnly]
         public ActionResult GradeList(string groupCode, string depCode)
         {
-            var records = from r in ctx.QuotaRecords
+            var records = (from r in ctx.QuotaRecords
                           where r.DepartmentCode == depCode
                           select new
                           {
-                              r.GUID,
                               r.QuotaCode,
                               r.DepartmentCode
-                          };
+                          }).Distinct();
             var grades = from g in ctx.Grades
                          where g.DepartmentCode == depCode
                          select new
@@ -74,7 +73,7 @@ namespace DangJian.Controllers
                        {
                            QuotaCode = q.Code,
                            Description = q.Description,
-                           FillInfo = j1.GUID == null ? "未填报" : "已填报",
+                           FillInfo = j1.QuotaCode == null ? "未填报" : "已填报",
                            Value = j2.Value
                        };
 
@@ -91,8 +90,33 @@ namespace DangJian.Controllers
         [HttpPost]
         public ActionResult Create(Grade grade)
         {
-            ViewBag.SaveOk = true;
-            return View();
+            var quota = ctx.Quotas.Find(grade.QuotaCode);
+            if (grade.Value > quota.Value)
+            {
+                ModelState.AddModelError("", "所评分值不能超过" + quota.Value);
+                return View();
+            }
+            else
+            {
+                grade.Deducting = quota.Value - grade.Value;
+                if (grade.Deducting > 0 && String.IsNullOrEmpty(grade.Reason))
+                {
+                    ModelState.AddModelError("", "请填写扣分原因");
+                    return View();
+                }
+
+                User user = Session["UserInfo"] as User;
+                if (user == null)
+                {
+                    return RedirectToAction("Index", "Account");
+                }
+                grade.CreateUser = user.UserId;
+                ctx.Grades.Add(grade);
+                ctx.SaveChanges();
+
+                ViewBag.SaveOk = true;
+                return View();
+            }
         }
 
         public ActionResult DeductingList(string depCode, string depName)

@@ -7,7 +7,7 @@
     {
         <tr>
             <td style="width: 200px;">
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.ActionLink(item.Name, "Details", "Grade", new { DepCode = item.Code, DepName = item.Name }, null)
             </td>
         </tr>
     }

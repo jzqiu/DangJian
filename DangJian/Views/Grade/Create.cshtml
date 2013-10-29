@@ -17,14 +17,13 @@
     @if (ViewBag.SaveOk == true)
     {
         <script type="text/javascript">
-            window.opener.location.href = window.opener.location.href;
+            window.opener.location.reload();
             window.close();
         </script>
     }
 
     @using (Html.BeginForm())
     {
-        @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
 
         <fieldset>

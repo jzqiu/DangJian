@@ -1,18 +1,43 @@
-﻿@{
+﻿@model IEnumerable<DangJian.ViewModels.DepartQuotaVM>
+
+@{
     ViewBag.Title = "首页";
 }
 
-<div style="float:left; width:600px;"></div>
-<div style="float:right; width:350px;">
-    <input type="button" value="预 警 中 心" style="width:100%" />
+<div style="float: left; width: 600px;"></div>
+<div style="float: right; width: 350px;">
+    <input type="button" value="预 警 中 心" style="width: 100%" onclick="GotoYuJing()" />
     <table class="table">
         <tr>
-            <td style="width:20px;">序号</td>
-            <td style="width:250px;">部门</td>
-            <td style="width:20px;">应填</td>
-            <td style="width:20px;">已填</td>
-            <td style="width:20px;">未填</td>
-            <td style="width:20px;">预警</td>
+            <td style="width: 20px;">序号</td>
+            <td style="width: 250px;">部门</td>
+            <td style="width: 20px;">应填</td>
+            <td style="width: 20px;">已填</td>
+            <td style="width: 20px;">未填</td>
+            <td style="width: 20px;">预警</td>
         </tr>
+        @{
+            int no = 0;
+        }
+        @foreach (var item in Model)
+        {
+            no++;
+            <tr>
+                <td>@no</td>
+                <td>@item.Name</td>
+                <td>@item.All</td>
+                <td>@item.Had</td>
+                <td>@(item.All - item.Had)</td>
+                <td></td>
+            </tr>
+        }
     </table>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function GotoYuJing() {
+            window.location = "@Url.Action("YuJing")";
+        }
+    </script>
+}

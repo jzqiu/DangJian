@@ -30,6 +30,7 @@ namespace DangJian.Controllers
             }
 
             var quota = ctx.Quotas.Find(quotaCode);
+            quota.QuotaRecords.Clear();
             quota.QuotaRecords = (from r in ctx.QuotaRecords
                                 where r.DepartmentCode == user.DepartmentCode
                                 && r.QuotaCode == quotaCode
@@ -43,6 +44,7 @@ namespace DangJian.Controllers
             ViewBag.CurrenDep = depName;
             ViewBag.DepCode = depCode;
             var quota = ctx.Quotas.Find(quotaCode);
+            quota.QuotaRecords.Clear();
             quota.QuotaRecords = (from r in ctx.QuotaRecords
                                   where r.DepartmentCode == depCode
                                   && r.QuotaCode == quotaCode
@@ -60,13 +62,13 @@ namespace DangJian.Controllers
                 return RedirectToAction("Index", "Account");
             }
 
-            var records = from r in ctx.QuotaRecords
+            var records = (from r in ctx.QuotaRecords
                           where r.DepartmentCode == user.DepartmentCode
                           select new
                           {
-                              r.GUID,
-                              r.QuotaCode
-                          };
+                              r.QuotaCode,
+                              r.DepartmentCode
+                          }).Distinct();
             var list = from q in ctx.Quotas
                        join r in records on q.Code equals r.QuotaCode into g
                        where q.GroupCode == groupCode
@@ -76,7 +78,7 @@ namespace DangJian.Controllers
                        {
                            QuotaCode = q.Code,
                            Description = q.Description,
-                           FillInfo = gg.GUID == null ? "未填报" : "已填报"
+                           FillInfo = gg.QuotaCode == null ? "未填报" : "已填报"
                        };
 
             return PartialView("_QuotaListPartial", list.ToList());
