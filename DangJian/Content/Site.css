@@ -416,8 +416,6 @@ fieldset {
 
 label {
     display: block;
-    font-size: 1.2em;
-    font-weight: 600;
 }
 
     label.checkbox {
@@ -783,3 +781,7 @@ tr.pager td {
 }
 
 /********************/
+
+.datepicker {
+    width:80px;
+}

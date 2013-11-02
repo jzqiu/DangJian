@@ -5,7 +5,15 @@
     {
         <tr>
             <td style="width:700px;">@Html.DisplayFor(modelItem => item.Description)</td>
-            <td>@Html.ActionLink(item.FillInfo, "Fill", new { QuotaCode = item.QuotaCode })</td>
+            <td style="width:60px;">
+                @if(item.IsNeed)
+                {
+
+                    @Html.ActionLink(item.FillInfo, "Fill", new { QuotaCode = item.QuotaCode });
+                }else{
+                    <span>无需填报</span>
+                }
+            </td>
         </tr>
     }
 </table>

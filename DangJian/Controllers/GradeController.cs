@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity.Migrations;
 
 namespace DangJian.Controllers
 {
@@ -73,6 +74,7 @@ namespace DangJian.Controllers
                        {
                            QuotaCode = q.Code,
                            Description = q.Description,
+                           IsNeed = q.IsNeed == "Y",
                            FillInfo = j1.QuotaCode == null ? "未填报" : "已填报",
                            Value = j2.Value
                        };
@@ -111,7 +113,7 @@ namespace DangJian.Controllers
                     return RedirectToAction("Index", "Account");
                 }
                 grade.CreateUser = user.UserId;
-                ctx.Grades.Add(grade);
+                ctx.Grades.AddOrUpdate(grade);
                 ctx.SaveChanges();
 
                 ViewBag.SaveOk = true;

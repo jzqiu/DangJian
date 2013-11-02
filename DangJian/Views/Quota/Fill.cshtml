@@ -13,7 +13,7 @@
 @Model.Standard
 <br />
 <h3>填报信息</h3>
-<input type="button" value="新增记录" />
+<input type="button" value="新增记录" onclick="NewDetail()" />
 <table class="table">
     <tr>
         <td style="width: 40px">序号</td>
@@ -37,3 +37,11 @@
         </tr>
     }
 </table>
+
+@section Scripts {
+    <script type="text/javascript">
+        function NewDetail() {
+            window.open('@Url.Action("NewDetail", new{ quotaCode = Model.Code })', '', 'width=800,height=500,location=no,menubar=no,status=no,scrollbars=yes');
+        }
+    </script>
+    }

@@ -1,0 +1,786 @@
+﻿@model DangJian.Models.Quota
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html style="background-color: white">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>填报</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //日期控件效果
+            $(".datepicker").datepicker({
+                showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true,
+                firstDay: 1,
+                dateFormat: 'yy-mm-dd',
+                dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+                dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+                monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                nextText: "下月",
+                prevText: "上月",
+                clearText: "清除",
+                currentText: "今日",
+                closeText: "关闭",
+                buttonImage: "../../Images/ico-cal.png",
+                buttonImageOnly: true,
+                buttonText: "选择日期",
+                showOn: "both",
+                showAnim: 'slideDown'
+            });
+        });
+    </script>
+</head>
+<body style="padding: 5px;">
+
+    @if (ViewBag.SaveOk == true)
+    {
+        <script type="text/javascript">
+            window.opener.location.reload();
+            window.close();
+        </script>
+    }
+
+    <form method="post" enctype="multipart/form-data">
+        @Html.ValidationSummary(true)
+        <input id="QuotaCode" name="QuotaCode" type="hidden" value="@Model.Code" />
+
+        @if (Model.ShowType == "101")
+        {
+            <div class="editor-label">
+                年度工作计划
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 年度工作计划。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                填报时间：@DateTime.Now.ToString("yyyy-MM-dd")
+            </div>
+        }
+
+        @if (Model.ShowType == "102")
+        {
+            <div class="editor-label">
+                召开时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" class="datepicker" data-val="true" data-val-required="请选择 召开时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                会议地点
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" data-val="true" data-val-required="请填写 会议地点。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                会议主题
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text3" data-val="true" data-val-required="请填写 会议主题。" />
+                <span class="field-validation-valid" data-valmsg-for="text3" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                主持人
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text4" data-val="true" data-val-required="请填写 主持人。" />
+                <span class="field-validation-valid" data-valmsg-for="text4" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                与会人员
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text5" data-val="true" data-val-required="请填写 与会人员。" />
+                <span class="field-validation-valid" data-valmsg-for="text5" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                会议内容
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="text6" rows="2" data-val="true" data-val-required="请填写 会议内容。">
+</textarea>
+                <span class="field-validation-valid" data-valmsg-for="text6" data-valmsg-replace="true"></span>
+            </div>
+        }
+
+        @if (Model.ShowType == "201")
+        {
+            <div class="editor-label">
+                学习计划
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 学习计划。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                活动时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" class="datepicker" data-val="true" data-val-required="请选择 活动时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                活动地点
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text3" data-val="true" data-val-required="请填写 活动地点。" />
+                <span class="field-validation-valid" data-valmsg-for="text3" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                主持人
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text4" data-val="true" data-val-required="请填写 主持人。" />
+                <span class="field-validation-valid" data-valmsg-for="text4" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                参加人数
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text5" data-val="true" data-val-required="请填写 参加人数。" />
+                <span class="field-validation-valid" data-valmsg-for="text5" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                学习内容
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="text6" rows="2" data-val="true" data-val-required="请填写 学习内容。">
+</textarea>
+                <span class="field-validation-valid" data-valmsg-for="text6" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                填报时间：@DateTime.Now.ToString("yyyy-MM-dd")
+            </div>
+        }
+
+        @if (Model.ShowType == "202")
+        {
+            <div class="editor-label">
+                活动时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" class="datepicker" data-val="true" data-val-required="请选择 活动时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                活动地点
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text3" data-val="true" data-val-required="请填写 活动地点。" />
+                <span class="field-validation-valid" data-valmsg-for="text3" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                参加人员
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text5" data-val="true" data-val-required="请填写 参加人员。" />
+                <span class="field-validation-valid" data-valmsg-for="text5" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                活动内容
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="text6" rows="2" data-val="true" data-val-required="请填写 活动内容。">
+</textarea>
+                <span class="field-validation-valid" data-valmsg-for="text6" data-valmsg-replace="true"></span>
+            </div>
+        }
+
+        @if (Model.ShowType == "203")
+        {
+            <div class="editor-label">
+                活动方案
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 活动方案。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                活动总结
+            </div>
+            <div class="editor-field">
+                <input name="file2" type="file" data-val="true" data-val-required="请上传 活动总结。" />
+                <span class="field-validation-valid" data-valmsg-for="file2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                活动图片及说明
+            </div>
+            <div class="editor-field">
+                <input name="file3" type="file" data-val="true" data-val-required="请上传 活动图片及说明。" />
+                <span class="field-validation-valid" data-valmsg-for="file3" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                填报时间：@DateTime.Now.ToString("yyyy-MM-dd")
+            </div>
+        }
+
+        @if (Model.ShowType == "302")
+        {
+            <div class="editor-label">
+                购房（起）
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" data-val="true" data-val-required="请填写 购房（起）。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                购车（起）
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" data-val="true" data-val-required="请填写 购车（起）。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                婚丧嫁娶（起）
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text3" data-val="true" data-val-required="请填写 婚丧嫁娶（起）。" />
+                <span class="field-validation-valid" data-valmsg-for="text3" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                礼金（合计）（元）
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text4" data-val="true" data-val-required="请填写 主持人。" />
+                <span class="field-validation-valid" data-valmsg-for="text4" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                礼券（合计）（元）
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text5" data-val="true" data-val-required="请填写 礼券（合计）（元）。" />
+                <span class="field-validation-valid" data-valmsg-for="text5" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                礼品（折价合计）（元）
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text6" data-val="true" data-val-required="请填写 礼品（折价合计）（元）。" />
+                <span class="field-validation-valid" data-valmsg-for="text6" data-valmsg-replace="true"></span>
+            </div>
+        }
+
+        @if (Model.ShowType == "303" || Model.ShowType == "404")
+        {
+            <div class="editor-label">
+                违纪人员姓名
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" data-val="true" data-val-required="请填写 违纪人员姓名。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                职务
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" data-val="true" data-val-required="请填写 职务。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                违纪时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text3" class="datepicker" data-val="true" data-val-required="请选择 违纪时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text3" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                违纪概况
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="text4" rows="2" data-val="true" data-val-required="请填写 违纪概况。">
+</textarea>
+                <span class="field-validation-valid" data-valmsg-for="text4" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                处理结果
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="text5" rows="2" data-val="true" data-val-required="请填写 处理结果。">
+</textarea>
+                <span class="field-validation-valid" data-valmsg-for="text5" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                填报时间：@DateTime.Now.ToString("yyyy-MM-dd")
+            </div>
+        }
+
+        @if (Model.ShowType == "304")
+        {
+            <div class="editor-label">
+                领导姓名
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" data-val="true" data-val-required="请填写 领导姓名。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                职务
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" data-val="true" data-val-required="请填写 职务。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                述职述廉范围
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text3" data-val="true" data-val-required="请选择 述职述廉范围。" />
+                <span class="field-validation-valid" data-valmsg-for="text3" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                述职述廉时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text4" class="datepicker" data-val="true" data-val-required="请选择 述职述廉时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text4" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                述职述廉报告
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 述职述廉报告。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                备注
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="remark" rows="2">
+</textarea>
+            </div>
+        }
+
+        @if (Model.ShowType == "305")
+        {
+            <div class="editor-label">
+                会议时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" class="datepicker" data-val="true" data-val-required="请选择 会议时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                会议地点
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" data-val="true" data-val-required="请填写 会议地点。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                主持人
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text3" data-val="true" data-val-required="请填写 主持人。" />
+                <span class="field-validation-valid" data-valmsg-for="text3" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                参加人员
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text4" data-val="true" data-val-required="请填写 参加人员。" />
+                <span class="field-validation-valid" data-valmsg-for="text4" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                会议内容
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="text5" rows="2" data-val="true" data-val-required="请填写 会议内容。">
+</textarea>
+                <span class="field-validation-valid" data-valmsg-for="text5" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                会议照片
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 会议照片。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+        }
+
+        @if (Model.ShowType == "401")
+        {
+            <div class="editor-label">
+                公开内容
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 公开内容。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                公开时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" class="datepicker" data-val="true" data-val-required="请选择 公开时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                公开范围
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" data-val="true" data-val-required="请填写 公开范围。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+        }
+
+        @if (Model.ShowType == "402" || Model.ShowType == "403")
+        {
+            <div class="editor-label">
+                违纪时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" class="datepicker" data-val="true" data-val-required="请选择 违纪时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                违纪概况
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="text2" rows="2" data-val="true" data-val-required="请填写 违纪概况。">
+</textarea>
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                处理结果
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="text3" rows="2" data-val="true" data-val-required="请填写 处理结果。">
+</textarea>
+                <span class="field-validation-valid" data-valmsg-for="text3" data-valmsg-replace="true"></span>
+            </div>            
+            <div class="editor-label">
+                填报时间：@DateTime.Now.ToString("yyyy-MM-dd")
+            </div>
+        }
+
+        @if (Model.ShowType == "501")
+        {
+            <div class="editor-label">
+                服务型党组织建设主题
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" data-val="true" data-val-required="请填写 服务型党组织建设主题。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                服务型党组织建设规划
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 服务型党组织建设规划。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                党建资源对外开放典型事例（至少2个）
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="text2" rows="2" data-val="true" data-val-required="请填写 党建资源对外开放典型事例（至少2个）。">
+</textarea>
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                照片
+            </div>
+            <div class="editor-field">
+                <input name="file2" type="file" data-val="true" data-val-required="请上传 照片。" />
+                <span class="field-validation-valid" data-valmsg-for="file2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                党内基本制度
+            </div>
+            <div class="editor-field">
+                <input name="file3" type="file" data-val="true" data-val-required="请上传 党内基本制度。" />
+                <span class="field-validation-valid" data-valmsg-for="file3" data-valmsg-replace="true"></span>
+            </div> 
+        }
+
+        @if (Model.ShowType == "502")
+        {
+            <div class="editor-label">
+                服务载体名称
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" data-val="true" data-val-required="请填写 服务载体名称。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                主要内容
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="text2" rows="2" data-val="true" data-val-required="请填写 主要内容。" ></textarea>
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                相关附件
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 相关附件。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                活动时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text3" class="datepicker" data-val="true" data-val-required="请选择 活动时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text3" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                活动内容
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="text4" rows="2" data-val="true" data-val-required="请填写 活动内容。" ></textarea>
+                <span class="field-validation-valid" data-valmsg-for="text4" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                活动照片
+            </div>
+            <div class="editor-field">
+                <input name="file2" type="file" data-val="true" data-val-required="请上传 活动照片。" />
+                <span class="field-validation-valid" data-valmsg-for="file2" data-valmsg-replace="true"></span>
+            </div>
+        }
+
+        @if (Model.ShowType == "503")
+        {
+            <div class="editor-label">
+                党员总数
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" data-val="true" data-val-required="请填写 党员总数。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                不合格党员数
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" data-val="true" data-val-required="请填写 不合格党员数。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                受党纪处分数
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text3" data-val="true" data-val-required="请选择 受党纪处分数。" />
+                <span class="field-validation-valid" data-valmsg-for="text3" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                领导班子民主测评优秀率
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text4" data-val="true" data-val-required="请填写 领导班子民主测评优秀率。" />
+                <span class="field-validation-valid" data-valmsg-for="text4" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                领导班子开展“3+3”阅读行动
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 领导班子开展“3+3”阅读行动。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                培育党员先锋团队
+            </div>
+            <div class="editor-field">
+                <input name="file2" type="file" data-val="true" data-val-required="请上传 培育党员先锋团队。" />
+                <span class="field-validation-valid" data-valmsg-for="file2" data-valmsg-replace="true"></span>
+            </div>
+        }
+
+        @if (Model.ShowType == "504")
+        {
+            <div class="editor-label">
+                服务项目或品牌名称
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" data-val="true" data-val-required="请填写 服务项目或品牌名称。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                启动时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" class="datepicker" data-val="true" data-val-required="请选择 启动时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                特色亮点
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text3" data-val="true" data-val-required="请选择 特色亮点。" />
+                <span class="field-validation-valid" data-valmsg-for="text3" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                建设规划
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 建设规划。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                实施情况
+            </div>
+            <div class="editor-field">
+                <input name="file2" type="file" data-val="true" data-val-required="请上传 实施情况。" />
+                <span class="field-validation-valid" data-valmsg-for="file2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                目前成效
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text4" data-val="true" data-val-required="请填写 目前成效。" />
+                <span class="field-validation-valid" data-valmsg-for="text4" data-valmsg-replace="true"></span>
+            </div>
+        }
+
+        @if (Model.ShowType == "505")
+        {
+            <div class="editor-label">
+                服务举措名称
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" data-val="true" data-val-required="请填写 服务举措名称。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                服务形式（多选）
+            </div>
+            <div class="editor-field">
+                <input type="checkbox" id="checkbox1" name="checkbox1" value="1" /><label for="checkbox1" class="checkbox">网格化（每年有组织地参加区域共建、社会公益活动不少于4次）</label><br />
+                <input type="checkbox" id="checkbox2" name="checkbox2" value="2" /><label for="checkbox2" class="checkbox">信息化（利用QQ群、博客、短信等信息化手段，扩展联系和服务党员群众渠道）</label><br />
+                <input type="checkbox" id="checkbox3" name="checkbox3" value="3" /><label for="checkbox3" class="checkbox">菜单式（设定菜单式服务项目，供党员群众按需选择）</label><br />
+                <input type="checkbox" id="checkbox4" name="checkbox4" value="4" /><label for="checkbox4" class="checkbox">互助式（包括党员教师“1+2”结对共进等结对服务）</label>
+            </div>
+            <div class="editor-label">
+                主要内容
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" data-val="true" data-val-required="请填写 主要内容。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                活动时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text3" class="datepicker" data-val="true" data-val-required="请选择 活动时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text3" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                活动内容
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text4" data-val="true" data-val-required="请填写 活动内容。" />
+                <span class="field-validation-valid" data-valmsg-for="text4" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                活动照片
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 活动照片。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+        }
+
+        @if (Model.ShowType == "601")
+        {
+            <div class="editor-label">
+                发表刊物
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" data-val="true" data-val-required="请填写 发表刊物。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                发表时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" class="datepicker" data-val="true" data-val-required="请选择 发表时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                刊物级别
+            </div>
+            <div class="editor-field">
+                <select name="level" style="width: 100px;">
+                    <option value="1">市级</option>
+                    <option value="2">苏州市级</option>
+                    <option value="3">省级</option>
+                    <option value="4">国家级</option>
+                </select>
+            </div>
+            <div class="editor-label">
+                发表文章
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 发表文章。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                刊物封面、目录、发表页照片
+            </div>
+            <div class="editor-field">
+                <input name="file2" type="file" data-val="true" data-val-required="请上传 刊物封面、目录、发表页照片。" />
+                <span class="field-validation-valid" data-valmsg-for="file2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                备注
+            </div>
+            <div class="editor-field">
+                <textarea cols="20" name="remark" rows="2">
+</textarea>
+            </div>
+        }
+
+        @if (Model.ShowType == "602")
+        {
+            <div class="editor-label">
+                表彰内容
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text1" data-val="true" data-val-required="请填写 表彰内容。" />
+                <span class="field-validation-valid" data-valmsg-for="text1" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                表彰时间
+            </div>
+            <div class="editor-field">
+                <input type="text" name="text2" class="datepicker" data-val="true" data-val-required="请选择 表彰时间。" />
+                <span class="field-validation-valid" data-valmsg-for="text2" data-valmsg-replace="true"></span>
+            </div>
+            <div class="editor-label">
+                表彰级别
+            </div>
+            <div class="editor-field">
+                <select name="level" style="width: 100px;">
+                    <option value="1">市级</option>
+                    <option value="2">苏州市级</option>
+                    <option value="3">省级</option>
+                    <option value="4">国家级</option>
+                </select>
+            </div>
+            <div class="editor-label">
+                证书等照片
+            </div>
+            <div class="editor-field">
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 证书等照片。" />
+                <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
+            </div>
+        }
+
+        <p>
+            <input type="submit" value="提　交" />
+        </p>
+    </form>
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>

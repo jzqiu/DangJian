@@ -6,16 +6,15 @@
         <td>@Html.DisplayFor(modelItem => item.Description)</td>
         <td>
             @{
-    if (item.FillInfo == "已填报")
-    {
-        <a href="#" onclick="javascript:ViewFill('@item.QuotaCode')">已填报</a>
+    if (!item.IsNeed)
+    { 
+                <a href="#" onclick="javascript:ViewFill('@item.QuotaCode')">无需填报</a>
     }
     else
     {
-        <span>未填报</span>
+                <a href="#" onclick="javascript:ViewFill('@item.QuotaCode')">@item.FillInfo</a>
     }
             }
-            @*Html.ActionLink(item.FillInfo, "Fill", new { QuotaCode = item.QuotaCode })*@
 
         </td>
         <td>@Html.DisplayFor(modelItem => item.Value)</td>

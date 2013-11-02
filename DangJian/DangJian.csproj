@@ -233,6 +233,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\ico-cal.png" />
     <Content Include="Models\DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBModel.edmx</DependentUpon>
@@ -301,9 +302,11 @@
     <Content Include="Views\Quota\ViewFill.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\YuJing.cshtml" />
+    <Content Include="Views\Quota\NewDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UpLoadFile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
