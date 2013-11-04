@@ -9,6 +9,7 @@ using System.Data.Entity.Migrations;
 
 namespace DangJian.Controllers
 {
+    [Authorize]
     public class GradeController : Controller
     {
         DJContext ctx = new DJContext();

@@ -1,0 +1,773 @@
+﻿@model DangJian.Models.QuotaRecord
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html style="background-color: white">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>查看指标明细</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body style="padding: 5px;">
+    <table class="table">
+        @if (ViewBag.ShowType == "101")
+        {
+            <tr>
+                <td class="nameField" style="width:100px;">年度工作计划
+                </td>
+                <td style="width:300px;">
+                    <a href="@Model.Info">查看附件</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">填报时间
+                </td>
+                <td>
+                    @Model.CreateDate
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "102")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">召开时间
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">会议地点
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">会议主题
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">主持人
+                </td>
+                <td>
+                    @infos[3]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">与会人员
+                </td>
+                <td>
+                    @infos[4]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">会议内容
+                </td>
+                <td>
+                    @infos[5]
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "201")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">学习计划
+                </td>
+                <td style="width:300px;">
+                    <a href="@infos[0]">查看附件</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">活动时间
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">活动地点
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">主持人
+                </td>
+                <td>
+                    @infos[3]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">参加人数
+                </td>
+                <td>
+                    @infos[4]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">学习内容
+                </td>
+                <td>
+                    @infos[5]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">填报时间
+                </td>
+                <td>
+                    @Model.CreateDate
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "202")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">活动时间
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">活动地点
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">参加人员
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">活动内容
+                </td>
+                <td>
+                    @infos[3]
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "203")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">活动方案
+                </td>
+                <td style="width:300px;">
+                    <a href="@infos[0]">查看附件</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField" style="width:100px;">活动总结
+                </td>
+                <td style="width:300px;">
+                    <a href="@infos[1]">查看附件</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">活动图片及说明
+                </td>
+                <td>
+                    <img src="@infos[2]" />
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">填报时间
+                </td>
+                <td>
+                    @Model.CreateDate
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "302")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">购房（起）
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">购车（起）
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">婚丧嫁娶（起）
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">礼金（合计）（元）
+                </td>
+                <td>
+                    @infos[3]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">礼券（合计）（元）
+                </td>
+                <td>
+                    @infos[4]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">礼品（折价合计）（元）
+                </td>
+                <td>
+                    @infos[5]
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "303" || ViewBag.ShowType == "404")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">违纪人员姓名
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">职务
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">违纪时间
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">违纪概况
+                </td>
+                <td>
+                    @infos[3]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">处理结果
+                </td>
+                <td>
+                    @infos[4]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">填报时间
+                </td>
+                <td>
+                    @Model.CreateDate
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "304")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">领导姓名
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">职务
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">述职述廉范围
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">述职述廉时间
+                </td>
+                <td>
+                    @infos[3]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">述职述廉报告
+                </td>
+                <td>
+                    <a href="@infos[4]">查看附件</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">备注
+                </td>
+                <td>
+                    @Model.Remark
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "305")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">会议时间
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">会议地点
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">主持人
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">参加人员
+                </td>
+                <td>
+                    @infos[3]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">会议内容
+                </td>
+                <td>
+                    @infos[4]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">会议照片
+                </td>
+                <td>
+                    <img src="@infos[5]" />
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "401")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">公开内容
+                </td>
+                <td style="width:300px;">
+                    <a href="@infos[0]">查看附件</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">公开时间
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">公开范围
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "402" || ViewBag.ShowType == "403")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">违纪时间
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">违纪概况
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">处理结果
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">填报时间
+                </td>
+                <td>
+                    @Model.CreateDate
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "501")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">服务型党组织建设主题
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">服务型党组织建设规划
+                </td>
+                <td>
+                    <a href="@infos[1]">查看附件</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">党建资源对外开放典型事例（至少2个）
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">照片
+                </td>
+                <td>
+                    <img src="@infos[3]" />
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">党内基本制度
+                </td>
+                <td>
+                    <a href="@infos[4]">查看附件</a>
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "502")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">服务载体名称
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">主要内容
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">相关附件
+                </td>
+                <td>
+                    <a href="@infos[2]">查看附件</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">活动时间
+                </td>
+                <td>
+                    @infos[3]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">活动内容
+                </td>
+                <td>
+                    @infos[4]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">活动照片
+                </td>
+                <td>
+                    <img src="@infos[5]" />
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "503")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">党员总数
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">不合格党员数
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">受党纪处分数
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">领导班子民主测评优秀率
+                </td>
+                <td>
+                    @infos[3]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">领导班子开展“3+3”阅读行动
+                </td>
+                <td>
+                    <a href="@infos[4]">查看附件</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">培育党员先锋团队
+                </td>
+                <td>
+                    <a href="@infos[5]">查看附件</a>
+                </td>
+            </tr>
+        }
+
+         @if (ViewBag.ShowType == "504")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">服务项目或品牌名称
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">启动时间
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">特色亮点
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">建设规划
+                </td>
+                <td>
+                    <a href="@infos[3]">查看附件</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">实施情况
+                </td>
+                <td>
+                    <a href="@infos[4]">查看附件</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">目前成效
+                </td>
+                <td>
+                    @infos[5]
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "505")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">服务举措名称
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">服务形式
+                </td>
+                <td>
+                    @if (infos[1].Contains("1"))
+                    {
+                       <span>网格化（每年有组织地参加区域共建、社会公益活动不少于4次）</span><br />
+                    }
+                    @if (infos[1].Contains("2"))
+                    {
+                       <span>信息化（利用QQ群、博客、短信等信息化手段，扩展联系和服务党员群众渠道）</span><br />
+                    }
+                    @if (infos[1].Contains("3"))
+                    {
+                       <span>菜单式（设定菜单式服务项目，供党员群众按需选择）</span><br />
+                    }
+                    @if (infos[1].Contains("4"))
+                    {
+                       <span>互助式（包括党员教师“1+2”结对共进等结对服务）</span><br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">主要内容
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">活动时间
+                </td>
+                <td>
+                    @infos[3]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">活动内容
+                </td>
+                <td>
+                    @infos[4]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">活动照片
+                </td>
+                <td>
+                    <img src="@infos[5]" />
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "601")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">发表刊物
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">发表时间
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">刊物级别
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">发表文章
+                </td>
+                <td>
+                    <a href="@infos[3]">查看附件</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">刊物封面、目录、发表页照片
+                </td>
+                <td>
+                    <img src="@infos[4]" />
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">备注
+                </td>
+                <td>
+                    @Model.Remark
+                </td>
+            </tr>
+        }
+
+        @if (ViewBag.ShowType == "602")
+        {
+            string[] infos = Model.Info.Split(';');
+            <tr>
+                <td class="nameField" style="width:100px;">表彰内容
+                </td>
+                <td style="width:300px;">
+                    @infos[0]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">表彰时间
+                </td>
+                <td>
+                    @infos[1]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">表彰级别
+                </td>
+                <td>
+                    @infos[2]
+                </td>
+            </tr>
+            <tr>
+                <td class="nameField">证书等照片
+                </td>
+                <td>
+                    <img src="@infos[3]" />
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

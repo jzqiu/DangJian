@@ -4,11 +4,20 @@
     ViewBag.Title = "指标填报";
 }
 
-<h2 style="text-align:center;">教育系统党风廉政建设责任制考核指标</h2>
+<h2 style="text-align: center;">教育系统党风廉政建设责任制考核指标</h2>
 
 @foreach (var item in Model)
 {
-    <h3><span>一级指标：</span> @Html.DisplayFor(modelItem => item.Name)</h3>
-    <br />
+    <h3 style="font-weight:bold;"><span>一级指标：</span>@item.Name （@item.Value 分）</h3>
     @Html.Action("QuotaList", "Quota", new { groupCode = item.Code })
+    <br />
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        function Fill(qCode) {
+            var url = "../Quota/Fill?quotaCode=" + qCode;
+            window.open(url, "_blank");
+        }
+    </script>
 }

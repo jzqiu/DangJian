@@ -32,6 +32,7 @@ namespace DangJian.Controllers
         private List<DepartQuotaVM> TongJi()
         {
             var all = (from q in ctx.Quotas.AsNoTracking()
+                       where q.IsNeed == "Y"
                        select q.Code).Count();
             var hads = (from r in ctx.QuotaRecords
                         select new

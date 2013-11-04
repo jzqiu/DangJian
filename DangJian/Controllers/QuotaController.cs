@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace DangJian.Controllers
 {
+    [Authorize]
     public class QuotaController : Controller
     {
         DJContext ctx = new DJContext();
@@ -91,6 +92,15 @@ namespace DangJian.Controllers
             var quota = ctx.Quotas.Find(quotaCode);
 
             return View(quota);
+        }
+
+        public ActionResult ViewDetail(string recordId)
+        {
+            var record = ctx.QuotaRecords.Find(recordId);
+            var quota = ctx.Quotas.Find(record.QuotaCode);
+            ViewBag.ShowType = quota.ShowType;
+
+            return View(record);
         }
 
         [HttpPost]

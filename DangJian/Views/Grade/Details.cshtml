@@ -21,7 +21,7 @@
         @foreach (var item in Model)
         { 
             <tr>
-                <td colspan="3">一级指标：  @Html.DisplayFor(modelItem => item.Name)</td>
+                <td colspan="3" style="font-weight:bold;">一级指标：@item.Name （@item.Value 分）</td>
             </tr>
             @Html.Action("GradeList", "Grade", new { groupCode = item.Code, depCode = ViewBag.DepCode })
         }
@@ -36,7 +36,7 @@
 
         function ViewFill(qCode) {
             var url = "../Quota/ViewFill?quotaCode=" + qCode + "&depCode=@ViewBag.DepCode&depName=@ViewBag.CurrenDep";
-            window.open(url, '', 'width=800,height=400,location=no,menubar=no,status=no,scrollbars=auto');
+            window.open(url, '_blank');
         }
     </script>
 }

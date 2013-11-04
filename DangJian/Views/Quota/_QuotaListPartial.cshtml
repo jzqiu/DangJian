@@ -8,8 +8,7 @@
             <td style="width:60px;">
                 @if(item.IsNeed)
                 {
-
-                    @Html.ActionLink(item.FillInfo, "Fill", new { QuotaCode = item.QuotaCode });
+                    <a href="#" onclick="javascript:Fill('@item.QuotaCode')">@item.FillInfo</a>
                 }else{
                     <span>无需填报</span>
                 }

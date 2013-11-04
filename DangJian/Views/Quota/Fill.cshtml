@@ -33,7 +33,7 @@
             <td>@item.CreateYear</td>
             <td>@item.CreateDate</td>
             <td>@item.Remark</td>
-            <td>@Html.ActionLink("查看", "")</td>
+            <td><a href="#" onclick="javascript:ViewDetail('@item.GUID')">查看</a></td>
         </tr>
     }
 </table>
@@ -42,6 +42,10 @@
     <script type="text/javascript">
         function NewDetail() {
             window.open('@Url.Action("NewDetail", new{ quotaCode = Model.Code })', '', 'width=800,height=500,location=no,menubar=no,status=no,scrollbars=yes');
+        }
+        function ViewDetail(id) {
+            var url = "ViewDetail?recordId=" + id;
+            window.open(url, '', 'width=800,height=500,location=no,menubar=no,status=no,scrollbars=yes');
         }
     </script>
     }
