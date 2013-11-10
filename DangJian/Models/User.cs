@@ -19,7 +19,5 @@ namespace DangJian.Models
         public string Password { get; set; }
         public string RoleType { get; set; }
         public string DepartmentCode { get; set; }
-    
-        public virtual Department Department { get; set; }
     }
 }

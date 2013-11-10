@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace DangJian.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         DJContext ctx = new DJContext();
         //
@@ -25,6 +25,11 @@ namespace DangJian.Controllers
         public ActionResult YuJing()
         {
             var list = TongJi();
+            if (LoginUser.RoleType != "admin")
+            {
+                return View(list.Where(l => l.Code == LoginUser.DepartmentCode)
+                    .ToList());
+            }
 
             return View(list);
         }

@@ -14,15 +14,8 @@ namespace DangJian.Models
     
     public partial class Department
     {
-        public Department()
-        {
-            this.Users = new HashSet<User>();
-        }
-    
         public string Code { get; set; }
         public string Name { get; set; }
         public Nullable<int> Seq { get; set; }
-    
-        public virtual ICollection<User> Users { get; set; }
     }
 }

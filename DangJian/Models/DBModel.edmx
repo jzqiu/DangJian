@@ -30,10 +30,6 @@
             <End Role="Quota" EntitySet="Quota" />
             <End Role="QuotaRecord" EntitySet="QuotaRecord" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_Department" Association="DJModel.Store.FK_User_Department">
-            <End Role="Department" EntitySet="Department" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Department">
           <Key>
@@ -66,6 +62,7 @@
           <Property Name="Standard" Type="nvarchar" MaxLength="100" />
           <Property Name="IsNeed" Type="char" MaxLength="1" />
           <Property Name="GroupCode" Type="varchar" MaxLength="10" />
+          <Property Name="HadRemark" Type="char" MaxLength="1" />
           <Property Name="ShowType" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="QuotaGroup">
@@ -139,18 +136,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_Department">
-          <End Role="Department" Type="DJModel.Store.Department" Multiplicity="0..1" />
-          <End Role="User" Type="DJModel.Store.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Code" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="DepartmentCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -158,10 +143,6 @@
         <EntityContainer Name="DJContext" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="DJModel.User" />
           <EntitySet Name="Departments" EntityType="DJModel.Department" />
-          <AssociationSet Name="FK_User_Department" Association="DJModel.FK_User_Department">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
           <EntitySet Name="Grades" EntityType="DJModel.Grade" />
           <EntitySet Name="V_GradeQuota" EntityType="DJModel.V_GradeQuota" />
           <EntitySet Name="Quotas" EntityType="DJModel.Quota" />
@@ -185,7 +166,6 @@
           <Property Name="Password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Type="String" Name="RoleType" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="DepartmentCode" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Department" Relationship="DJModel.FK_User_Department" FromRole="User" ToRole="Department" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -194,20 +174,7 @@
           <Property Type="String" Name="Code" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="Seq" />
-          <NavigationProperty Name="Users" Relationship="DJModel.FK_User_Department" FromRole="Department" ToRole="User" />
         </EntityType>
-        <Association Name="FK_User_Department">
-          <End Type="DJModel.Department" Role="Department" Multiplicity="0..1" />
-          <End Type="DJModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Code" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="DepartmentCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Grade">
           <Key>
             <PropertyRef Name="QuotaCode" />
@@ -246,6 +213,7 @@
           <Property Type="String" Name="ShowType" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="QuotaGroup" Relationship="DJModel.FK_Quota_QuotaGroup" FromRole="Quota" ToRole="QuotaGroup" />
           <NavigationProperty Name="QuotaRecords" Relationship="DJModel.FK_QuotaRecord_Quota" FromRole="Quota" ToRole="QuotaRecord" />
+          <Property Type="String" Name="HadRemark" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="QuotaGroup">
           <Key>
@@ -348,6 +316,7 @@
           <EntitySetMapping Name="Quotas">
             <EntityTypeMapping TypeName="DJModel.Quota">
               <MappingFragment StoreEntitySet="Quota">
+                <ScalarProperty Name="HadRemark" ColumnName="HadRemark" />
                 <ScalarProperty Name="ShowType" ColumnName="ShowType" />
                 <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
                 <ScalarProperty Name="IsNeed" ColumnName="IsNeed" />

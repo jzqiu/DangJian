@@ -27,6 +27,7 @@ namespace DangJian.Models
         public string IsNeed { get; set; }
         public string GroupCode { get; set; }
         public string ShowType { get; set; }
+        public string HadRemark { get; set; }
     
         public virtual QuotaGroup QuotaGroup { get; set; }
         public virtual ICollection<QuotaRecord> QuotaRecords { get; set; }

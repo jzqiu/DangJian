@@ -10,7 +10,7 @@ using System.Data.Entity.Migrations;
 namespace DangJian.Controllers
 {
     [Authorize]
-    public class GradeController : Controller
+    public class GradeController : BaseController
     {
         DJContext ctx = new DJContext();
         //
@@ -21,9 +21,15 @@ namespace DangJian.Controllers
             var sum = (from g in ctx.QuotaGroups
                        select g.Value).Sum();
             ViewBag.QSum = sum;
-            var deps = ctx.Departments.OrderBy(d => d.Seq).ToList();
 
-            return View(deps);
+            IQueryable<Department> deps = ctx.Departments;
+            if (LoginUser.RoleType != "admin")
+            {
+                deps = deps.Where(d => d.Code == LoginUser.DepartmentCode);
+            }
+            deps.OrderBy(d => d.Seq).ToList();
+
+            return View(deps.OrderBy(d => d.Seq).ToList());
         }
 
         public ActionResult Details(string depCode, string depName)
@@ -108,12 +114,7 @@ namespace DangJian.Controllers
                     return View();
                 }
 
-                User user = Session["UserInfo"] as User;
-                if (user == null)
-                {
-                    return RedirectToAction("Index", "Account");
-                }
-                grade.CreateUser = user.UserId;
+                grade.CreateUser = LoginUser.UserId;
                 ctx.Grades.AddOrUpdate(grade);
                 ctx.SaveChanges();
 

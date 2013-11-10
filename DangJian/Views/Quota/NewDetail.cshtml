@@ -39,6 +39,16 @@
                 showAnim: 'slideDown'
             });
         });
+
+        function CheckFile(src) {
+            if (!/\.(gif|jpg|jpeg|bmp)$/.test(src)) {
+                alert("照片文件格式不正确，请重新选择。");
+                $("#submit").attr("disabled", "true");
+            }
+            else {
+                $("#submit")[0].disabled = false;
+            }
+        }
     </script>
 </head>
 <body style="padding: 5px;">
@@ -405,7 +415,7 @@
                 会议照片
             </div>
             <div class="editor-field">
-                <input name="file1" type="file" data-val="true" data-val-required="请上传 会议照片。" />
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 会议照片。" onchange="CheckFile(this.value)" />
                 <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
             </div>
         }
@@ -493,7 +503,7 @@
                 照片
             </div>
             <div class="editor-field">
-                <input name="file2" type="file" data-val="true" data-val-required="请上传 照片。" />
+                <input name="file2" type="file" data-val="true" data-val-required="请上传 照片。" onchange="CheckFile(this.value)" />
                 <span class="field-validation-valid" data-valmsg-for="file2" data-valmsg-replace="true"></span>
             </div>
             <div class="editor-label">
@@ -546,7 +556,7 @@
                 活动照片
             </div>
             <div class="editor-field">
-                <input name="file2" type="file" data-val="true" data-val-required="请上传 活动照片。" />
+                <input name="file2" type="file" data-val="true" data-val-required="请上传 活动照片。" onchange="CheckFile(this.value)" />
                 <span class="field-validation-valid" data-valmsg-for="file2" data-valmsg-replace="true"></span>
             </div>
         }
@@ -686,7 +696,7 @@
                 活动照片
             </div>
             <div class="editor-field">
-                <input name="file1" type="file" data-val="true" data-val-required="请上传 活动照片。" />
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 活动照片。" onchange="CheckFile(this.value)" />
                 <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
             </div>
         }
@@ -729,7 +739,7 @@
                 刊物封面、目录、发表页照片
             </div>
             <div class="editor-field">
-                <input name="file2" type="file" data-val="true" data-val-required="请上传 刊物封面、目录、发表页照片。" />
+                <input name="file2" type="file" data-val="true" data-val-required="请上传 刊物封面、目录、发表页照片。" onchange="CheckFile(this.value)" />
                 <span class="field-validation-valid" data-valmsg-for="file2" data-valmsg-replace="true"></span>
             </div>
             <div class="editor-label">
@@ -772,13 +782,13 @@
                 证书等照片
             </div>
             <div class="editor-field">
-                <input name="file1" type="file" data-val="true" data-val-required="请上传 证书等照片。" />
+                <input name="file1" type="file" data-val="true" data-val-required="请上传 证书等照片。" onchange="CheckFile(this.value)" />
                 <span class="field-validation-valid" data-valmsg-for="file1" data-valmsg-replace="true"></span>
             </div>
         }
 
         <p>
-            <input type="submit" value="提　交" />
+            <input id="submit" type="submit" value="提　交" />
         </p>
     </form>
     @Scripts.Render("~/bundles/jqueryval")

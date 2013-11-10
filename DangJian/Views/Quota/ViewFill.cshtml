@@ -14,7 +14,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <script type="text/javascript">
         function Grade() {
-            window.location = "@Url.Action("Create", "Grade", new { quotaCode=Model.Code, depCode=ViewBag.DepCode })";
+            window.location = "@Url.Action("Create", "Grade", new { quotaCode = Model.Code, depCode = ViewBag.DepCode })";
         }
 
         function ViewDetail(id) {
@@ -26,7 +26,10 @@
 <body style="padding: 0 2px 2px 2px;">
     <h2>当前查看部门：@ViewBag.CurrenDep</h2>
     <h3>指标详情&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">标准分： @Model.Value.ToString() 分</span></h3>
-    <input type="button" value="打　分" onclick="Grade()" />
+    @if (ViewBag.IsAdmin)
+    {
+        <input type="button" value="打　分" onclick="Grade()" />
+    }
     <br />
     @Model.Description
     <br />
@@ -40,7 +43,10 @@
             <td style="width: 40px">序号</td>
             <td style="width: 60px">年份</td>
             <td style="width: 80px">填报日期</td>
-            <td style="width: 200px">备注</td>
+            @if (Model.HadRemark == "Y")
+            {
+                <td style="width: 200px">备注</td>
+            }
             <td style="width: 80px">填报明细</td>
         </tr>
         @{
@@ -53,7 +59,10 @@
                 <td>@no</td>
                 <td>@item.CreateYear</td>
                 <td>@item.CreateDate</td>
-                <td>@item.Remark</td>
+                @if (Model.HadRemark == "Y")
+                {
+                    <td>@item.Remark</td>
+                }
                 <td><a href="#" onclick="javascript:ViewDetail('@item.GUID')">查看</a></td>
             </tr>
         }

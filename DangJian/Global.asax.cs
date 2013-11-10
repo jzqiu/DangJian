@@ -26,19 +26,19 @@ namespace DangJian
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            Exception exception = Server.GetLastError();
-            Response.Clear();
-            HttpException httpException = exception as HttpException;
-            RouteData routeData = new RouteData();
-            routeData.Values.Add("controller", "Account");
-            routeData.Values.Add("action", "Index");
+           // Exception exception = Server.GetLastError();
+           // Response.Clear();
+           // HttpException httpException = exception as HttpException;
+           // RouteData routeData = new RouteData();
+           // routeData.Values.Add("controller", "Account");
+           // routeData.Values.Add("action", "Index");
             
-            // Clear the error on server.
-            Server.ClearError();
-            // Call target Controller and pass the routeData.
-            IController errorController = new DangJian.Controllers.AccountController();
-            errorController.Execute(new RequestContext(
-           new HttpContextWrapper(Context), routeData));
+           // // Clear the error on server.
+           // Server.ClearError();
+           // // Call target Controller and pass the routeData.
+           // IController errorController = new DangJian.Controllers.AccountController();
+           // errorController.Execute(new RequestContext(
+           //new HttpContextWrapper(Context), routeData));
         }
     }
 }

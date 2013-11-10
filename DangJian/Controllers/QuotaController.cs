@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace DangJian.Controllers
 {
     [Authorize]
-    public class QuotaController : Controller
+    public class QuotaController : BaseController
     {
         DJContext ctx = new DJContext();
         //
@@ -24,19 +24,15 @@ namespace DangJian.Controllers
 
         public ActionResult Fill(string quotaCode)
         {
-            User user = Session["UserInfo"] as User;
-            if (user == null)
-            {
-                return RedirectToAction("Index", "Account");
-            }
-
-            ViewBag.DepCode = user.DepartmentCode;
+            ViewBag.DepCode = LoginUser.DepartmentCode;
             var quota = ctx.Quotas.Find(quotaCode);
             quota.QuotaRecords.Clear();
             quota.QuotaRecords = (from r in ctx.QuotaRecords
-                                  where r.DepartmentCode == user.DepartmentCode
+                                  where r.DepartmentCode == LoginUser.DepartmentCode
                                   && r.QuotaCode == quotaCode
-                                  select r).ToList();
+                                  select r)
+                                  .OrderByDescending(r=>r.CreateDate)
+                                  .ToList();
 
             return View(quota);
         }
@@ -45,12 +41,15 @@ namespace DangJian.Controllers
         {
             ViewBag.CurrenDep = depName;
             ViewBag.DepCode = depCode;
+            ViewBag.IsAdmin = LoginUser.RoleType == "admin";
             var quota = ctx.Quotas.Find(quotaCode);
             quota.QuotaRecords.Clear();
             quota.QuotaRecords = (from r in ctx.QuotaRecords
                                   where r.DepartmentCode == depCode
                                   && r.QuotaCode == quotaCode
-                                  select r).ToList();
+                                  select r)
+                                  .OrderByDescending(r => r.CreateDate)
+                                  .ToList();
 
             return View(quota);
         }
@@ -58,14 +57,8 @@ namespace DangJian.Controllers
         [ChildActionOnly]
         public ActionResult QuotaList(string groupCode)
         {
-            User user = Session["UserInfo"] as User;
-            if (user == null)
-            {
-                return RedirectToAction("Index", "Account");
-            }
-
             var records = (from r in ctx.QuotaRecords
-                           where r.DepartmentCode == user.DepartmentCode
+                           where r.DepartmentCode == LoginUser.DepartmentCode
                            select new
                            {
                                r.QuotaCode,
@@ -106,11 +99,6 @@ namespace DangJian.Controllers
         [HttpPost]
         public ActionResult NewDetail(FormCollection form)
         {
-            User user = Session["UserInfo"] as User;
-            if (user == null)
-            {
-                return RedirectToAction("Index", "Account");
-            }
             ViewBag.SaveOk = false;
             var quota = ctx.Quotas.Find(form.Get("QuotaCode"));
 
@@ -118,10 +106,10 @@ namespace DangJian.Controllers
             {
                 GUID = Guid.NewGuid().ToString(),
                 QuotaCode = quota.Code,
-                CreateUser = user.UserName,
+                CreateUser = LoginUser.UserName,
                 CreateYear = DateTime.Now.Year,
                 CreateDate = DateTime.Now.ToString("yyyy-MM-dd"),
-                DepartmentCode = user.DepartmentCode
+                DepartmentCode = LoginUser.DepartmentCode
             };
 
             #region 填报内容处理

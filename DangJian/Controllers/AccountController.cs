@@ -9,7 +9,7 @@ using System.Web.Security;
 
 namespace DangJian.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         DJContext ctx = new DJContext();
 
@@ -44,13 +44,7 @@ namespace DangJian.Controllers
         [HttpPost]
         public ActionResult ChangePwd(string OldPwd, string Password, string CFPassword)
         {
-            User user = Session["UserInfo"] as User;
-            if (user == null)
-            {
-                return RedirectToAction("Index", "Account");
-            }
-
-            if (user.Password != OldPwd)
+            if (LoginUser.Password != OldPwd)
             {
                 ModelState.AddModelError("", "旧密码错误，请重新输入。");
             }
@@ -60,8 +54,8 @@ namespace DangJian.Controllers
             }
             else
             {
-                ctx.Entry(user).State = EntityState.Modified;
-                user.Password = Password;
+                ctx.Entry(LoginUser).State = EntityState.Modified;
+                LoginUser.Password = Password;
                 ctx.SaveChanges();
                 ViewBag.StatusMessage = "密码修改成功！";
             }
